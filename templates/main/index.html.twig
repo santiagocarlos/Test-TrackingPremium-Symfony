@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TrackingPremium!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <h1>Hello TrackingPremium! ✅</h1>
+            <h3>This is a list of companies courriers</h3>
+    </div>
+
+
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Name Company</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {% for company in companies %}
+
+                <tr>
+                    <td>{{ company.name }}</td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="companies" id="company{{ company.id }}" value="{{ company.name }}">
+                        </div>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <button class="btn btn-lg btn-success" name="btn-continue" id="btnContinue">Continue</button>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        const button = document.getElementById('btnContinue');
+
+        button.onclick = function() {
+            let radios = document.getElementsByName("companies");
+            let selected = Array.from(radios).find(radio => radio.checked);
+
+            if (selected) {
+                alert('The company selected is: '+ selected.value);
+            }else{
+                alert('Error: please select one company')
+            }
+        }
+    </script>
+
+{% endblock %}
